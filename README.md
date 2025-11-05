@@ -51,12 +51,8 @@ By automating and enhancing the end-to-end DR submission and review process, OPG
 
 | Layer | Tool / Technology |
 |-------|--------------------|
-| Frontend | Salesforce Lightning / LWC |
-| Backend | Apex (Salesforce), Node.js |
 | AI / ML | AISAY + Custom AI models (OCR, NLP, Validation Engine) |
 | OCR | Tesseract / AWS Textract |
-| Integration | Salesforce Einstein / Apex REST APIs |
-| Storage | Salesforce Data Cloud / AWS S3 |
 | Summary Generation | GPT-based model (AISAY integration) |
 
 ---
