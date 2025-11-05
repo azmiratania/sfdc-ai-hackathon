@@ -1,8 +1,10 @@
 # 🧠 Team Deputies
 
 ### SFDC AI Hackathon 2025  
-**Project:** Smarter Deputy Report (DR) Processing for OPGO
+**Project:** Smarter Deputy Report (DR) Processing for OPGO  
+
 💬 “Empowering Deputies, Supporting Officers — AI for a more humane and efficient OPG process.”
+
 
 ---
 
