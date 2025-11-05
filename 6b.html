@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Final Submission – Success</title>
+<style>
+  :root{
+    --bg:#f5f7fb; --panel:#fff; --ink:#1f2a37; --line:#d6d9e0;
+    --radius:12px; --brand:#2e5a88; --ok:#16a34a; --ok-weak:#eafff1;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
+  }
+  /* top bar */
+  .topbar{border:2px solid var(--line); margin:18px; padding:18px 22px; border-radius:12px;
+    background:#f8fafc; display:flex; align-items:center; justify-content:space-between}
+  .logo{height:44px;width:140px;border:2px solid var(--line);border-radius:8px;display:flex;
+    align-items:center;justify-content:center;color:#667085;background:#fff;font-weight:600}
+  .nav{display:flex;gap:28px} .nav a{color:#364152;text-decoration:none;font-weight:500}
+
+  h2{margin:18px 0 0; text-align:center; font-size:18px; font-weight:700}
+
+  /* success card */
+  .wrap{display:grid; place-items:center; margin-top:40px}
+  .card{width:min(640px,92vw); background:var(--ok-weak); border:3px solid #22c55e;
+    border-radius:12px; padding:26px 28px; text-align:center}
+  .tick{width:58px;height:58px;border-radius:50%;border:3px solid #16a34a;
+    display:grid;place-items:center;margin:4px auto 14px;color:#16a34a}
+  .title{font-weight:700; margin:4px 0 12px; color:#15803d}
+  .meta{color:#4b5563; margin:4px 0}
+  .meta strong{font-weight:600}
+  .btn{
+    margin:18px auto 6px; display:inline-flex; align-items:center; gap:8px;
+    border:2px solid var(--line); border-radius:10px; padding:10px 16px;
+    background:#fff; cursor:pointer; font-weight:700; color:#1f2937;
+  }
+  .btn:active{transform:translateY(1px)}
+  .dl-icon{width:16px;height:16px;display:inline-block}
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">[OPGO LOGO]</div>
+    <nav class="nav">
+      <a href="1.html">Dashboard</a>
+      <a href="#">Tasks</a>
+      <a href="#">Support</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <h2>Final Submission</h2>
+
+  <main class="wrap">
+    <section class="card">
+      <div class="tick">
+        <!-- check icon -->
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 6 9 17l-5-5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="title">Report submitted successfully!</div>
+
+      <div class="meta"><strong>Reference:</strong> <span id="refId">OPG-</span></div>
+      <div class="meta"><strong>Submitted:</strong> <span id="submittedAt">—</span></div>
+
+      <button class="btn" id="downloadBtn" type="button">
+        <svg class="dl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 3v12m0 0 4-4m-4 4-4-4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M20 21H4" stroke-linecap="round"/>
+        </svg>
+        Download Receipt
+      </button>
+    </section>
+  </main>
+
+  <script>
+    // Format helpers
+    function pad(n){ return n.toString().padStart(2,'0'); }
+    function formatTime(d){
+      // e.g., "31 Oct 2025, 10:45 AM" in user's local time
+      const day = pad(d.getDate());
+      const month = d.toLocaleString(undefined, { month: 'short' });
+      const year = d.getFullYear();
+      let h = d.getHours(), m = pad(d.getMinutes());
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      h = h % 12; if (h === 0) h = 12;
+      return `${day} ${month} ${year}, ${h}:${m} ${ampm}`;
+    }
+
+    // Generate reference like OPG-YYYY-MM-DD-#### (pseudo-random last 4 digits)
+    function makeRef(d){
+      const yyyy = d.getFullYear();
+      const mm = pad(d.getMonth()+1);
+      const dd = pad(d.getDate());
+      const rand = Math.floor(Math.random()*9000)+1000; // 1000-9999
+      return `OPG-${yyyy}-${mm}-${dd}-${rand}`;
+    }
+
+    // On load: set Submitted time to now and create Reference
+    const now = new Date();
+    document.getElementById('submittedAt').textContent = formatTime(now);
+    document.getElementById('refId').textContent = makeRef(now);
+
+    // Demo "Download Receipt" click (replace with real file link if you have one)
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      alert('Receipt download placeholder – wire up to your generated PDF.');
+    });
+  </script>
+</body>
+</html>

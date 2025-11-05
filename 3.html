@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upload Supporting Documents</title>
+  <style>
+    :root{
+      --bg:#f5f7fb; --panel:#ffffff; --ink:#1f2a37; --muted:#6b7280; --line:#cfd5df; --line-dark:#aab3c2; --radius:10px; --brand:#2e5a88; --ok:#16a34a;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; transition:opacity 0.5s ease;}
+    body.fade-out{opacity:0;}
+
+    /* Header */
+    .topbar{border:2px solid var(--line-dark); margin:18px; padding:18px 22px; border-radius:12px; background:#f8fafc; display:flex; align-items:center; justify-content:space-between}
+    .logo{height:44px;width:140px;border:2px solid var(--line-dark);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#667085;background:#fff;font-weight:600}
+    .nav{display:flex;gap:28px}
+    .nav a{color:#364152;text-decoration:none;font-weight:500}
+
+    /* Page */
+    .wrap{max-width:1100px;margin:0 auto}
+    h2{font-size:18px;font-weight:700;margin:12px 6px}
+
+    .panel{border:2px solid var(--line-dark);border-radius:12px;background:#fff;padding:18px;margin:14px 6px 80px}
+
+    /* Section card */
+    .doc-card{border:2px solid var(--line-dark);border-radius:10px;background:#fbfcfe;margin:14px 0;padding:14px}
+    .doc-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+    .doc-title{display:flex;align-items:center;gap:10px;font-weight:700}
+    .emoji{font-size:18px}
+    .status{color:#9aa3b2;font-size:13px;font-weight:600}
+    .status.ok{color:var(--ok)}
+
+    /* help tooltip */
+    .info{position:relative;display:inline-flex;align-items:center;margin-left:6px}
+    .info .dot{width:16px;height:16px;border-radius:50%;display:inline-grid;place-items:center;background:#eef2f7;border:1px solid var(--line-dark); color:#64748b; font-size:12px; font-weight:700; cursor:help}
+    .info .tooltip{position:absolute;left:22px;top:-6px;background:#111827;color:#fff;padding:6px 8px;border-radius:6px;font-size:12px;white-space:nowrap;opacity:0;transform:translateY(4px);transition:.15s}
+    .info:hover .tooltip{opacity:1;transform:translateY(-2px)}
+
+    /* Upload rows styled like the wireframe */
+    .row{border:2px solid var(--line-dark);border-radius:8px;background:#fff;min-height:46px;display:flex;align-items:center;justify-content:center;gap:10px;color:#394555;padding:6px 10px}
+    .row.filename{justify-content:flex-start;color:#7b8696; font-size:14px}
+    .row.drag{outline:3px dashed #7aa2d6; background:#f0f6ff}
+
+    .upload-btn{position:relative;display:inline-flex;align-items:center;gap:8px;font-weight:700;cursor:pointer;padding:8px 12px;border-radius:8px;}
+    .upload-btn input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+    .upload-icon{width:18px;height:18px;display:inline-grid;place-items:center;color:#263445}
+
+    /* Footer */
+    .footer{position:sticky;bottom:0;padding:18px 0;background:linear-gradient(to top, rgba(245,247,251,.95), rgba(245,247,251,0));}
+    .footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:flex-end}
+    .next{background:#263445;color:#fff;border:0;border-radius:10px;height:44px;padding:0 24px;font-weight:700;cursor:pointer;opacity:.5}
+    .next.enabled{opacity:1}
+    .next:active{transform:translateY(1px)}
+  </style>
+</head>
+<body>
+  <header class="topbar wrap">
+    <div class="logo">[OPGO LOGO]</div>
+    <nav class="nav">
+      <a href="1.html">Dashboard</a>
+      <a href="#">Tasks</a>
+      <a href="#">Support</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <h2>Upload Supporting Documents</h2>
+
+    <section class="panel" id="uploadPanel">
+      <!-- Bank Statement -->
+      <div class="doc-card" data-section>
+        <div class="doc-head">
+          <div class="doc-title">
+            <span class="emoji">🏦</span>
+            <span>Bank Statement</span>
+            <span class="info"><span class="dot">?</span><span class="tooltip">Recent 3 months preferred</span></span>
+          </div>
+          <div class="status">[Not uploaded]</div>
+        </div>
+        <div class="row drop" data-drop>
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16V4m0 0 4 4m-4-4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <label class="upload-btn">Choose File
+            <input type="file" />
+          </label>
+        </div>
+        <div class="row filename" aria-live="polite">No file selected</div>
+      </div>
+
+      <!-- Property Deed -->
+      <div class="doc-card" data-section>
+        <div class="doc-head">
+          <div class="doc-title">
+            <span class="emoji">🏠</span>
+            <span>Property Deed</span>
+            <span class="info"><span class="dot">?</span><span class="tooltip">PDF, JPG, or PNG</span></span>
+          </div>
+          <div class="status">[Not uploaded]</div>
+        </div>
+        <div class="row drop" data-drop>
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16V4m0 0 4 4m-4-4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <label class="upload-btn">Choose File
+            <input type="file" />
+          </label>
+        </div>
+        <div class="row filename" aria-live="polite">No file selected</div>
+      </div>
+
+      <!-- Rental Agreement -->
+      <div class="doc-card" data-section>
+        <div class="doc-head">
+          <div class="doc-title">
+            <span class="emoji">📄</span>
+            <span>Rental Agreement</span>
+            <span class="info"><span class="dot">?</span><span class="tooltip">Signed copy if possible</span></span>
+          </div>
+          <div class="status">[Not uploaded]</div>
+        </div>
+        <div class="row drop" data-drop>
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16V4m0 0 4 4m-4-4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <label class="upload-btn">Choose File
+            <input type="file" />
+          </label>
+        </div>
+        <div class="row filename" aria-live="polite">No file selected</div>
+      </div>
+
+      <!-- Pay Slip -->
+      <div class="doc-card" data-section>
+        <div class="doc-head">
+          <div class="doc-title">
+            <span class="emoji">💼</span>
+            <span>Pay Slip</span>
+            <span class="info"><span class="dot">?</span><span class="tooltip">Latest month's payslip</span></span>
+          </div>
+          <div class="status">[Not uploaded]</div>
+        </div>
+        <div class="row drop" data-drop>
+          <span class="upload-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16V4m0 0 4 4m-4-4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </span>
+          <label class="upload-btn">Choose File
+            <input type="file" />
+          </label>
+        </div>
+        <div class="row filename" aria-live="polite">No file selected</div>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">
+    <div class="footer-inner">
+      <button id="nextBtn" class="next" onclick="goNext()" disabled>Next</button>
+    </div>
+  </div>
+
+  <script>
+    // Display filename, update status to [Uploaded], and enable Next when any file is chosen
+    const sections = document.querySelectorAll('[data-section]');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateNextState(){
+      const anyUploaded = [...sections].some(sec => sec.dataset.uploaded === 'true');
+      nextBtn.disabled = !anyUploaded;
+      nextBtn.classList.toggle('enabled', anyUploaded);
+    }
+
+    sections.forEach(sec => {
+      const fileInput = sec.querySelector('input[type=file]');
+      const filenameRow = sec.querySelector('.row.filename');
+      const status = sec.querySelector('.status');
+      const drop = sec.querySelector('[data-drop]');
+
+      fileInput.addEventListener('change', () => {
+        if(fileInput.files && fileInput.files.length){
+          filenameRow.textContent = fileInput.files[0].name;
+          status.textContent = '[Uploaded]';
+          status.classList.add('ok');
+          sec.dataset.uploaded = 'true';
+          updateNextState();
+        }
+      });
+
+      // drag & drop highlight (visual only)
+      ;['dragenter','dragover'].forEach(evt => drop.addEventListener(evt, e=>{e.preventDefault(); drop.classList.add('drag');}));
+      ;['dragleave','drop'].forEach(evt => drop.addEventListener(evt, e=>{e.preventDefault(); drop.classList.remove('drag');}));
+      drop.addEventListener('drop', e => {
+        const files = e.dataTransfer.files;
+        if(files && files.length){
+          fileInput.files = files; // assign to input
+          fileInput.dispatchEvent(new Event('change'));
+        }
+      });
+    });
+
+    function goNext(){
+      if(nextBtn.disabled) return;
+      document.body.classList.add('fade-out');
+      setTimeout(()=>{ window.location.href='4.html'; },500);
+    }
+  </script>
+</body>
+</html>

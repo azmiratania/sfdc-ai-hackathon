@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Final Submission</title>
+  <style>
+    :root{
+      --bg:#f5f7fb; --panel:#ffffff; --ink:#1f2a37; --muted:#6b7280; --line:#d6d9e0; --radius:10px; --brand:#2e5a88;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--bg); color:var(--ink);
+      font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial;
+      transition:opacity 0.5s ease;
+    }
+    body.fade-out{opacity:0;}
+
+    /* Top bar */
+    .topbar{border:2px solid var(--line); margin:18px; padding:18px 22px; border-radius:12px;
+      background:#f8fafc; display:flex; align-items:center; justify-content:space-between}
+    .logo{height:44px;width:140px;border:2px solid var(--line);border-radius:8px;
+      display:flex;align-items:center;justify-content:center;color:#667085;background:#fff;font-weight:600}
+    .nav{display:flex;gap:28px}
+    .nav a{color:#364152;text-decoration:none;font-weight:500}
+
+    /* Main section */
+    .container{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;}
+    h2{margin:10px 0;font-size:20px;font-weight:700;text-align:center;}
+
+    .summary-box{background:#fff;border:2px solid var(--line);border-radius:14px;
+      padding:24px 36px;margin-top:10px;width:min(480px,90vw);}
+    .summary-title{font-weight:700;text-align:center;margin-bottom:16px;}
+    .summary-row{display:flex;justify-content:space-between;margin:8px 0;font-size:15px;}
+    .summary-row + hr{margin:12px 0;border:none;border-top:1px solid var(--line);}
+
+    .checkbox-area{border:2px solid var(--line);border-radius:10px;padding:12px 16px;margin-top:26px;
+      width:min(480px,90vw);background:#fff;display:flex;align-items:center;gap:10px;font-size:14px;color:#374151;}
+    .checkbox-area input{width:16px;height:16px;cursor:pointer;}
+
+    .submit-btn{margin-top:20px;background:#263445;color:#fff;border:none;border-radius:10px;
+      padding:12px 22px;font-size:16px;font-weight:700;cursor:pointer;width:min(480px,90vw);height:48px;}
+    .submit-btn:disabled{background:#9ca3af;cursor:not-allowed;}
+
+    /* Overlay with spinner */
+    .overlay{
+      position:fixed; inset:0; background:rgba(255,255,255,0.8);
+      display:none; align-items:center; justify-content:center; z-index:9999;
+      backdrop-filter:saturate(120%) blur(2px);
+    }
+    .overlay.show{display:flex;}
+    .overlay-card{
+      background:#fff; border:2px solid var(--line); border-radius:12px; padding:22px 26px;
+      display:flex; align-items:center; gap:14px; box-shadow:0 8px 24px rgba(0,0,0,.08);
+    }
+    .spinner{
+      width:28px; height:28px; border-radius:50%;
+      border:3px solid #e5e7eb; border-top-color:var(--brand); animation:spin .9s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .overlay-text{font-weight:700; color:#1f2937;}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">[OPGO LOGO]</div>
+    <nav class="nav">
+      <a href="1.html">Dashboard</a>
+      <a href="#">Tasks</a>
+      <a href="#">Support</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h2>Final Submission</h2>
+    <div class="summary-box">
+      <div class="summary-title">Report Summary</div>
+      <hr>
+      <div class="summary-row"><span>Total Income:</span><span>S$4,350.00</span></div>
+      <div class="summary-row"><span>Total Expenses:</span><span>S$1,420.50</span></div>
+      <div class="summary-row"><span>Net Position:</span><span>S$2,929.50</span></div>
+      <hr>
+      <div class="summary-row"><span>Documents Uploaded:</span><span>4 files</span></div>
+    </div>
+
+    <div class="checkbox-area">
+      <input type="checkbox" id="confirm" />
+      <label for="confirm">I confirm that all the information provided is accurate and complete to the best of my knowledge</label>
+    </div>
+
+    <button class="submit-btn" id="submitBtn" disabled>Submit Report</button>
+  </main>
+
+  <!-- Submitting overlay -->
+  <div class="overlay" id="submittingOverlay" aria-live="polite" aria-busy="true" role="status">
+    <div class="overlay-card">
+      <div class="spinner" aria-hidden="true"></div>
+      <div class="overlay-text">Submitting your report…</div>
+    </div>
+  </div>
+
+  <script>
+    const checkbox = document.getElementById('confirm');
+    const btn = document.getElementById('submitBtn');
+    const overlay = document.getElementById('submittingOverlay');
+
+    // Enable button only when checkbox is ticked
+    checkbox.addEventListener('change', () => {
+      btn.disabled = !checkbox.checked;
+    });
+
+    // Show overlay, then fade + navigate to 6b.html
+    btn.addEventListener('click', () => {
+      overlay.classList.add('show');          // 1) show spinner overlay immediately
+      setTimeout(() => {                      // 2) small grace period so user sees it
+        document.body.classList.add('fade-out');
+        setTimeout(() => {                    // 3) navigate once faded
+          window.location.href = '6b.html';
+        }, 500);
+      }, 400);
+    });
+  </script>
+</body>
+</html>

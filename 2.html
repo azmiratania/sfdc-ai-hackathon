@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About the Person (P)</title>
+  <style>
+    :root{
+      --bg:#f5f7fb; --panel:#ffffff; --ink:#1f2a37; --muted:#6b7280; --line:#d6d9e0; --radius:10px; --brand:#2e5a88;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; background:var(--bg); color:var(--ink); font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial; transition:opacity 0.5s ease;}
+    body.fade-out{opacity:0;}
+
+    /* Top bar */
+    .topbar{border:2px solid var(--line); margin:18px; padding:18px 22px; border-radius:12px; background:#f8fafc; display:flex; align-items:center; justify-content:space-between}
+    .logo{height:44px;width:140px;border:2px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;color:#667085;background:#fff;font-weight:600}
+    .nav{display:flex;gap:28px}
+    .nav a{color:#364152;text-decoration:none;font-weight:500}
+
+    main{margin:20px 40px;}
+
+    h2{font-size:16px;font-weight:600;margin-bottom:10px;}
+
+    .form-box{border:2px solid var(--line);border-radius:10px;background:#fff;padding:20px;margin-top:8px;width:min(800px,95vw);}
+    .question{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #e5e7eb;font-size:15px;}
+    .question:last-child{border-bottom:none;}
+
+    .options label{margin-left:6px;margin-right:18px;}
+
+    .btn{margin-top:24px;float:right;background:#263445;color:#fff;border:none;border-radius:10px;padding:10px 24px;font-size:15px;font-weight:600;cursor:pointer;}
+    .btn:hover{opacity:0.9;}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo">[OPGO LOGO]</div>
+    <nav class="nav">
+      <a href="1.html">Dashboard</a>
+      <a href="#">Tasks</a>
+      <a href="#">Support</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>About the Person (P)</h2>
+    <div class="form-box">
+      <div class="question">
+        <span>Does P have any bank accounts?</span>
+        <div class="options">
+          <input type="radio" name="bank" id="bank-no"><label for="bank-no">No</label>
+          <input type="radio" name="bank" id="bank-yes"><label for="bank-yes">Yes</label>
+        </div>
+      </div>
+      <div class="question">
+        <span>Does P have any properties?</span>
+        <div class="options">
+          <input type="radio" name="property" id="property-no"><label for="property-no">No</label>
+          <input type="radio" name="property" id="property-yes"><label for="property-yes">Yes</label>
+        </div>
+      </div>
+      <div class="question">
+        <span>Does P have any rental income?</span>
+        <div class="options">
+          <input type="radio" name="rental" id="rental-no"><label for="rental-no">No</label>
+          <input type="radio" name="rental" id="rental-yes"><label for="rental-yes">Yes</label>
+        </div>
+      </div>
+      <div class="question">
+        <span>Does P have a monthly salary?</span>
+        <div class="options">
+          <input type="radio" name="salary" id="salary-no"><label for="salary-no">No</label>
+          <input type="radio" name="salary" id="salary-yes"><label for="salary-yes">Yes</label>
+        </div>
+      </div>
+    </div>
+    <button class="btn" onclick="goNext()">Continue</button>
+  </main>
+
+  <script>
+    function goNext(){
+      document.body.classList.add('fade-out');
+      setTimeout(()=>{
+        window.location.href='3.html';
+      },500);
+    }
+  </script>
+</body>
+</html>
